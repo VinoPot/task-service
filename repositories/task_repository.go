@@ -10,8 +10,15 @@ var DB *gorm.DB
 
 func Init(db *gorm.DB) error {
 	DB = db
-	DB.AutoMigrate(&models.Task{})
+	err := DB.AutoMigrate(&models.Task{})
+	if err != nil {
+		return err
+	}
 	return nil
+}
+
+func GetDB() *gorm.DB {
+	return DB
 }
 
 func GetAllTasks() []models.Task {
