@@ -1,7 +1,6 @@
 package repositories
 
 import (
-	"fmt"
 	"task-service/models"
 
 	"gorm.io/gorm"
@@ -9,18 +8,13 @@ import (
 
 var DB *gorm.DB
 
-func Init(db *gorm.DB) {
+func Init(db *gorm.DB) error {
 	DB = db
 	DB.AutoMigrate(&models.Task{})
+	return nil
 }
 
 func GetAllTasks() []models.Task {
-	if DB == nil {
-		fmt.Println("❌ DB is nil!")
-	} else {
-		fmt.Println("✅ DB is initialized")
-	}
-
 	var tasks []models.Task
 	DB.Find(&tasks)
 	return tasks
@@ -36,16 +30,29 @@ func CreateTask(task *models.Task) {
 	DB.Create(task)
 }
 
-func UpdateTask(id string, newTask *models.Task) {
+func UpdateTask(id string, newTask *models.Task) error {
 	var task models.Task
-	DB.First(&task, id)
+	result := DB.First(&task, id)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
 	task.Title = newTask.Title
 	task.Description = newTask.Description
 	task.Done = newTask.Done
+
 	DB.Save(&task)
+	return nil
 }
 
-func DeleteTask(id string) {
+func DeleteTask(id string) error {
 	var task models.Task
-	DB.Delete(&task, id)
+	result := DB.Delete(&task, id)
+
+	if result.Error != nil {
+		return result.Error
+	}
+
+	return nil
 }

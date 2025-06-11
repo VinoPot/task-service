@@ -30,8 +30,11 @@
 .env.local
 *.env.*
 !.env.template
+!.env.production
 !.env.example
 !.gitignore
 
 # Swag generated file
 docs/docs.go
+docs/swagger.json
+docs/doc.json

@@ -26,8 +26,13 @@ info:
 paths:
   /tasks:
     get:
-      description: get tasks
+      description: get a list of tasks with optional filtering by done status
       operationId: get-tasks
+      parameters:
+      - description: Filter by completion status
+        in: query
+        name: done
+        type: boolean
       produces:
       - application/json
       responses:

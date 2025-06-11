@@ -1,8 +1,10 @@
 package main
 
 import (
+	"log"
 	"task-service/config"
 	_ "task-service/docs"
+
 	"task-service/handlers"
 
 	"github.com/gin-gonic/gin"
@@ -30,17 +32,17 @@ func main() {
 
 	r := gin.Default()
 
-	//Роуты
+	// Роуты
 	r.GET("/tasks", handlers.GetAllTasks)
 	r.GET("/tasks/:id", handlers.GetTaskByID)
 	r.POST("/tasks", handlers.CreateTask)
 	r.PUT("/tasks/:id", handlers.UpdateTask)
 	r.DELETE("/tasks/:id", handlers.DeleteTask)
 
-	//Swagger
-
+	// Swagger
 	url := ginSwagger.URL("http://localhost:8080/swagger/doc.json")
 	r.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 
+	log.Println("Сервер запущен на порту :8080")
 	r.Run(":8080")
 }

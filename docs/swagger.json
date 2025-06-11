@@ -22,12 +22,20 @@
     "paths": {
         "/tasks": {
             "get": {
-                "description": "get tasks",
+                "description": "get a list of tasks with optional filtering by done status",
                 "produces": [
                     "application/json"
                 ],
                 "summary": "Get all tasks",
                 "operationId": "get-tasks",
+                "parameters": [
+                    {
+                        "type": "boolean",
+                        "description": "Filter by completion status",
+                        "name": "done",
+                        "in": "query"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
