@@ -1,0 +1,37 @@
+# Binaries for programs and plugins
+*.exe
+*.dll
+*.so
+*.dylib
+
+# Test binary, build with `go test -c`
+*.test
+
+# Output of the go coverage tool
+*.out
+
+# Dependency directories
+/vendor/
+/go/pkg/
+
+# IDE / Editor
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# Logs and local DB
+*.log
+*.sqlite
+*.db
+
+# Environments
+.env
+.env.local
+*.env.*
+!.env.template
+!.env.example
+!.gitignore
+
+# Swag generated file
+docs/docs.go
